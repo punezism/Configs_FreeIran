@@ -13,3 +13,11 @@ vless://6ac1636a-b47c-498c-8ef6-026cad467879@45.149.12.110:443?encryption=none&s
 vless://6ac1636a-b47c-498c-8ef6-026cad467879@147.185.161.102:2053?encryption=none&security=tls&sni=nwa.wnwass.workers.dev&fp=random&insecure=0&allowInsecure=0&type=ws&host=nwa.wnwass.workers.dev&path=%2F#@Configs_FreeIran19
 vless://6ac1636a-b47c-498c-8ef6-026cad467879@185.162.229.188:2096?encryption=none&security=tls&sni=nwa.wnwass.workers.dev&fp=random&insecure=0&allowInsecure=0&type=ws&host=nwa.wnwass.workers.dev&path=%2F#@Configs_FreeIran20
 vless://6ac1636a-b47c-498c-8ef6-026cad467879@198.177.56.156:2083?encryption=none&security=tls&sni=nwa.wnwass.workers.dev&fp=random&insecure=0&allowInsecure=0&type=ws&host=nwa.wnwass.workers.dev&path=%2F#@Configs_FreeIran21
+ss://YWVzLTI1Ni1jZmI6YW1hem9uc2tyMDU%3D@35.182.57.53:443#@Configs_FreeIran01
+anytls://c870fe5a-0729-11f0-8cf9-f23c93136cb3@76842b4a-tb71c0-tgprfk-ddgs.losjan20.west.wctype.com:8300?idle_session_check_interval=30s&idle_session_timeout=30s&min_idle_session=5&security=tls&sni=76842b4a-tb71c0-tgprfk-ddgs.losjan20.west.wctype.com&allowInsecure=true#@Configs_FreeIran02
+trojan://BxceQaOe@18.183.163.141:50712?security=tls&sni=t.me%252Fripaojiedian&allowInsecure=true#@Configs_FreeIran03
+trojan://BxceQaOe@18.183.163.141:50712?security=tls&sni=t.me%2Fripaojiedian&allowInsecure=true&fp=chrome#@Configs_FreeIran04
+trojan://d84665c37878196ecf983cf6910e3b44@18.181.199.223:1180?security=tls&sni=www.nintendogames.net&allowInsecure=true&fp=chrome#@Configs_FreeIran05
+trojan://BxceQaOe@95.40.68.192:17801?security=tls&sni=t.me%2Fripaojiedian&allowInsecure=true&fp=chrome#@Configs_FreeIran06
+trojan://BxceQaOe@95.40.68.192:17801?security=tls&sni=t.me%252Fripaojiedian&allowInsecure=true&fp=chrome#@Configs_FreeIran07
+trojan://BxceQaOe@95.40.68.192:17801?security=tls&sni=t.me%2Fripaojiedian&allowInsecure=true&fp=chrome#@Configs_FreeIran08
