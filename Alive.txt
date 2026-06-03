@@ -21,3 +21,7 @@ trojan://d84665c37878196ecf983cf6910e3b44@18.181.199.223:1180?security=tls&sni=w
 trojan://BxceQaOe@95.40.68.192:17801?security=tls&sni=t.me%2Fripaojiedian&allowInsecure=true&fp=chrome#@Configs_FreeIran06
 trojan://BxceQaOe@95.40.68.192:17801?security=tls&sni=t.me%252Fripaojiedian&allowInsecure=true&fp=chrome#@Configs_FreeIran07
 trojan://BxceQaOe@95.40.68.192:17801?security=tls&sni=t.me%2Fripaojiedian&allowInsecure=true&fp=chrome#@Configs_FreeIran08
+vless://9aa2aa0d-13c2-4fac-ba11-20adfcc8c920@legend.zdshop.ir:2053?encryption=none&security=tls&sni=efa032125afd38a7.kiWiJuiCe.IR.&insecure=0&allowInsecure=0&type=ws&path=%2F#@Configs_FreeIran01
+vless://9aa2aa0d-13c2-4fac-ba11-20adfcc8c920@strong.zdshop.ir:2053?encryption=none&security=tls&sni=c03c7b5ac6429dd0.kiWiJuiCe.IR.&insecure=0&allowInsecure=0&type=ws&path=%2F#@Configs_FreeIran02
+vless://bf2040c0-fa64-436d-9ed5-dd96120735f5@uk.darkcloudnetwork.com:54002?encryption=none&security=reality&sni=www.google.com&fp=firefox&pbk=lBEMdwI_lryGGFTL2oLE8NyceSCDH9G2PXJ7FkHBmBI&sid=96843fc9fbc3e6f5&type=xhttp&host=uk.darkcloudnetwork.com&path=%2Fapp.js&mode=auto&extra=%7B%22scMaxEachPostBytes%22%3A%2B1000000%2C%2B%22scMaxConcurrentPosts%22%3A%2B100%2C%2B%22scMinPostsIntervalMs%22%3A%2B30%2C%2B%22xPaddingBytes%22%3A%2B%22100-1000%22%2C%2B%22noGRPCHeader%22%3A%2Bfalse%7D#@Configs_FreeIran03
+vless://d497a244-9f20-fc6c-b303-8d01a528f53e@172.65.150.143:3389?encryption=none&security=none&type=xhttp&path=%2Fed&mode=packet-up#@Configs_FreeIran04
