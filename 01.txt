@@ -1,0 +1,241 @@
+//@version=5
+strategy("SMC Sniper PRO - First Touch OB", overlay=true,
+     initial_capital=1000,
+     currency=currency.USD,
+     pyramiding=0)
+
+//====================================================
+// INPUTS
+//====================================================
+
+length      = input.int(10, "Structure Lookback", minval=2)
+rr1         = input.float(1.0, "TP1 RR")
+rr2         = input.float(3.0, "TP2 RR")
+sl_offset   = input.float(0.5, "SL Offset (%)", step=0.1) / 100
+
+useTrend    = input.bool(true, "EMA200 Trend Filter")
+useSession  = input.bool(true, "London/NewYork Filter")
+useATR      = input.bool(true, "ATR Break Filter")
+
+//====================================================
+// TREND FILTER
+//====================================================
+
+ema200 = ta.ema(close, 200)
+
+bullTrend = close > ema200
+bearTrend = close < ema200
+
+plot(ema200, color=color.orange, linewidth=2)
+
+//====================================================
+// SESSION FILTER
+// UTC
+// لندن + نیویورک
+//====================================================
+
+session_ok =
+     not na(time(timeframe.period, "0800-2200"))
+
+if not useSession
+    session_ok := true
+
+//====================================================
+// ATR
+//====================================================
+
+atr = ta.atr(14)
+
+//====================================================
+// STRUCTURE
+//====================================================
+
+hh = ta.highest(high, length)[1]
+ll = ta.lowest(low, length)[1]
+
+bullish_msb =
+     close > hh and
+     (not useATR or (close - hh > atr * 0.20))
+
+bearish_msb =
+     close < ll and
+     (not useATR or (ll - close > atr * 0.20))
+
+//====================================================
+// ORDER BLOCK STORAGE
+//====================================================
+
+var float ob_high = na
+var float ob_low = na
+
+var bool bullish_ob = false
+var bool bearish_ob = false
+
+var bool ob_touched = false
+
+//====================================================
+// NEW BULLISH OB
+//====================================================
+
+if bullish_msb and (high[1] - low[1] > atr * 0.50)
+
+    bullish_ob := true
+    bearish_ob := false
+
+    ob_high := high[1]
+    ob_low := low[1]
+
+    ob_touched := false
+
+//====================================================
+// NEW BEARISH OB
+//====================================================
+
+if bearish_msb and (high[1] - low[1] > atr * 0.50)
+
+    bearish_ob := true
+    bullish_ob := false
+
+    ob_high := high[1]
+    ob_low := low[1]
+
+    ob_touched := false
+
+//====================================================
+// DRAW OB
+//====================================================
+
+p1 = plot(ob_high, color=color.new(color.white, 100))
+p2 = plot(ob_low, color=color.new(color.white, 100))
+
+fill(
+     p1,
+     p2,
+     color=
+         bullish_ob ?
+         color.new(color.green, 85)
+         :
+         bearish_ob ?
+         color.new(color.red, 85)
+         :
+         na)
+
+//====================================================
+// FIRST TOUCH LOGIC
+//====================================================
+
+first_touch_long =
+     bullish_ob and
+     not ob_touched and
+     low <= ob_high and
+     low >= ob_low
+
+first_touch_short =
+     bearish_ob and
+     not ob_touched and
+     high >= ob_low and
+     high <= ob_high
+
+//====================================================
+// ENTRY CONFIRMATION
+//====================================================
+
+bullish_rejection =
+     close > open
+
+bearish_rejection =
+     close < open
+
+longCondition =
+     first_touch_long and
+     bullish_rejection and
+     session_ok and
+     (not useTrend or bullTrend)
+
+shortCondition =
+     first_touch_short and
+     bearish_rejection and
+     session_ok and
+     (not useTrend or bearTrend)
+
+//====================================================
+// LONG
+//====================================================
+
+if longCondition and strategy.position_size == 0
+
+    ob_touched := true
+
+    sl = ob_low * (1 - sl_offset)
+
+    risk = close - sl
+
+    tp1 = close + risk * rr1
+    tp2 = close + risk * rr2
+
+    strategy.entry("LONG", strategy.long)
+
+    strategy.exit(
+         "LONG TP1",
+         "LONG",
+         qty_percent=50,
+         stop=sl,
+         limit=tp1)
+
+    strategy.exit(
+         "LONG TP2",
+         "LONG",
+         qty_percent=50,
+         stop=sl,
+         limit=tp2)
+
+//====================================================
+// SHORT
+//====================================================
+
+if shortCondition and strategy.position_size == 0
+
+    ob_touched := true
+
+    sl = ob_high * (1 + sl_offset)
+
+    risk = sl - close
+
+    tp1 = close - risk * rr1
+    tp2 = close - risk * rr2
+
+    strategy.entry("SHORT", strategy.short)
+
+    strategy.exit(
+         "SHORT TP1",
+         "SHORT",
+         qty_percent=50,
+         stop=sl,
+         limit=tp1)
+
+    strategy.exit(
+         "SHORT TP2",
+         "SHORT",
+         qty_percent=50,
+         stop=sl,
+         limit=tp2)
+
+//====================================================
+// VISUALS
+//====================================================
+
+plotshape(
+     bullish_msb,
+     style=shape.triangleup,
+     location=location.belowbar,
+     color=color.lime,
+     size=size.tiny,
+     title="Bull MSB")
+
+plotshape(
+     bearish_msb,
+     style=shape.triangledown,
+     location=location.abovebar,
+     color=color.red,
+     size=size.tiny,
+     title="Bear MSB")
